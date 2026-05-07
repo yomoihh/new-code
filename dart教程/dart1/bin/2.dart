@@ -100,6 +100,7 @@ void main(){
     "三个包子",
     "四个包子",
     "五个包子",
+    "上传测试",
   ];
   int index=0;
   while (index<table.length){
