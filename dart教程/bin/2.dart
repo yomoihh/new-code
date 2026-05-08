@@ -1,4 +1,4 @@
-void main(){
+void main() {
 // String? username =null;//变量表示可以是null
 // username?.startsWith("新");//安全访问
 // //客观判断
@@ -32,16 +32,15 @@ void main(){
 //   print(a);
 
 
-
   //常见比较运算符
-  int a=1;
-  int b=2;
-  print(a==b);
-  print(a!=b);
-  print(a>b);
-  print(a>=b);
-  print(a<b);
-  print(a<=b);
+  int a = 1;
+  int b = 2;
+  print(a == b);
+  print(a != b);
+  print(a > b);
+  print(a >= b);
+  print(a < b);
+  print(a <= b);
 
 
   //逻辑运算符 (&同true 为true ，||有一个true为true ，！对变量取反）
@@ -52,7 +51,7 @@ void main(){
   // print(isopenlight || isopendoor);
   // print(isopenlight && !isopendoor);
 // //流程控制
-  int score =56;
+  int score = 56;
 // if(score>60);
 // print("恭喜你及格");
 // }
@@ -63,18 +62,18 @@ void main(){
 // }else{
 //   print("还没结婚呢");
 // }
-  if(score >80){
+  if (score > 80) {
     print("优秀");
-  }else if (score>60){
+  } else if (score > 60) {
     print("及格");
-  }else{
+  } else {
     print("不及格");
   }
 //三元运算符 表达式（布尔值）？结果1:结果2;
-  print(70 >= 60 ? "及格": "不及格");
+  print(70 >= 60 ? "及格" : "不及格");
 //switch case语句
-  int state =2;
-  switch(state){
+  int state = 2;
+  switch (state) {
     case 1:
       print("代付款");
     case 2:
@@ -90,22 +89,40 @@ void main(){
       print("已完成");
   }
 //while和for循环语句
-  while(state>1){
-    print("异常");
-    break;
-  }
-  List table =[
+//   while (state > 1) {
+//     print("异常");
+//     break;
+//   }
+  List table = [
     "一个包子",
     "二个包子",
     "三个包子",
     "四个包子",
     "五个包子",
-    "5ci测试",
   ];
-  int index=0;
-  while (index<table.length){
+  // 第一个场景
+  int index = 0;
+  while (index < table.length) {
+    if (index == 2) {
+      // break; break是跳出整一个循环
+      index += 1;
+      continue; //continue是跳出当前迭代，进入下一次迭代
+    }
     print(table[index]);
     index += 1;
-
   }
-}
+  //第一种场景 吃到第二个的时候 就已经吃饱 跳出整个循环break
+  //第二种场景 要吃第三个包子的时候 第三个包子有bug 跳过第三个接着吃第四个第五个
+  for (var index = 0; index < table.length; index++) {
+    if (index == 2) {
+      // break; // 满足条件就跳出整个循环
+      continue;
+    }
+    print(table[index]);
+  }
+
+ }
+
+
+
+
