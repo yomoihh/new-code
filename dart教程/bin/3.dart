@@ -78,35 +78,54 @@
 // }
 /////////////////////////////////////////////////////////
 //构造函数语法糖
+// void main(){
+// Person p= Person(name:'老高',age:20,sex:'男');
+// p.study();
+// Person pp=Person(name:'小张',age:20,sex:'男');
+// pp.study();
+// Person ppp=Person.createPerson(name:'新同学',age:30);
+// ppp.study();
+// }
+// class Person{
+//   String?name="";
+//   int? age =0;
+//   String? sex ="男";
+//   //默认构造函数
+//   // Person({String? name,int? age,String?sex}){
+//   //   this.name= name;
+//   //   this.age=age;
+//   //   this.sex=sex;
+//   // }
+//   Person({this.age,this.name,this.sex});//语法糖写法
+//   //命名构造函数
+//   // Person.createPerson({String? name,int? age,String?sex}){
+//   //   this.name= name;
+//   //   this.age=age;
+//   //   this.sex=sex;
+//   // }
+// //   Person.createPerson({this.sex,this.name,this.age});//语法糖写法
+// //   void study(){
+// //     print("$name在学习");
+// //   }
+// // }
+// //dart中类的公有属性和私有属性
+// //公有属性，提供自身或者其他外部文件和类使用的属性和方法
+// // 私有属性，仅供自身使用的属性和方法，其他外部文件和类无法访问
+// //语法:私有属性以下划线开头，如_name，其余均为公有属性
 void main(){
-Person p= Person(name:'老高',age:20,sex:'男');
-p.study();
-Person pp=Person(name:'小张',age:20,sex:'男');
-pp.study();
-Person ppp=Person.createPerson(name:'新同学',age:30);
-ppp.study();
 }
 class Person{
-  String?name="";
-  int? age =0;
-  String? sex ="男";
-  //默认构造函数
-  // Person({String? name,int? age,String?sex}){
-  //   this.name= name;
-  //   this.age=age;
-  //   this.sex=sex;
-  // }
-  Person({this.age,this.name,this.sex});//语法糖写法
-  //命名构造函数
-  // Person.createPerson({String? name,int? age,String?sex}){
-  //   this.name= name;
-  //   this.age=age;
-  //   this.sex=sex;
-  // }
-  Person.createPerson({this.sex,this.name,this.age});//语法糖写法
-  void study(){
+String?name="";
+int? age =0;
+String? sex ="男";
+
+Person.createPerson({String? name,int? age,String?sex}){
+  this.name= name;
+  this.age=age;
+  this.sex=sex;
+}
+  void _study(){
     print("$name在学习");
   }
 }
-
 
