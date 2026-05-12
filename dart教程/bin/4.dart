@@ -110,8 +110,33 @@
 // }
 ///////////////////////////////////////////////////////////////
 //dart中泛型 或者Map
-list list=[];
-list.add("");
-list.add(123);
-list.add(true);
-list.add([]);
+//定义:Dart允许使用类型参数，限定类型的同时又让类型更加灵活，让代码更加健壮和维护性更强
+//场景:List类型中只想存储String类型怎么办?函数中返回值希望和参数一个类型怎么办?
+//常见分类:泛型集合、泛型方法、泛型类
+// void main(List<String> args) {
+// //列表泛型
+// List<String>list=[];
+// // list.add("");
+// // list.add(123);
+// // list.add(true);
+// // list.add([]);
+// Map<String, int> map={};
+// map["a"]=1;
+// getValue<String>("1");
+// printlist<String>(["1","2","3"]);
+// Student<int> s=Student();
+// s.name=1;
+// }
+// //函数中的方法
+// T getValue<T>(T value){
+//   return value;
+// }
+
+// void printlist<T>(List<T> list){
+//     for(var i =0 ;i < list.length;i++){
+//         print(list[i]);
+//     }
+// }
+// class Student<T>{
+//     T?name;
+// }
