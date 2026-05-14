@@ -1,0 +1,69 @@
+/* Input */
+.input_group {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.input_group input {
+  height: 100%;
+  width: 60%;
+  outline: none;
+}
+.input_group button {
+  border: none;
+  outline: none;
+  background: #fff;
+}
+.input_group button[disabled] {
+  color: #aaa;
+}
+.is-invalid {
+  border: 1px solid red;
+}
+.invalid-feedback {
+  color: red;
+  padding-top: 5px;
+}
+
+.login {
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.logo {
+  text-align: center;
+}
+.logo img {
+  width: 150px;
+}
+.text_group,
+.login_des,
+.login_btn {
+  margin-top: 20px;
+}
+.login_des {
+  color: #aaa;
+  line-height: 22px;
+}
+.login_des span {
+  color: #4d90fe;
+}
+.login_btn button {
+  width: 100%;
+  height: 40px;
+  background-color: #48ca38;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  border: none;
+  outline: none;
+}
+.login_btn button[disabled] {
+  background-color: #8bda81;
+}
