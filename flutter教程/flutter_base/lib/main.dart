@@ -8,11 +8,21 @@ void main() {
   runApp(
     MaterialApp(
       title: "Flutter组件",
-      theme: ThemeData(scaffoldBackgroundColor: Colors.red),
-      home: Scaffold(),
+      // theme: ThemeData(scaffoldBackgroundColor: Colors.red),
+      home: Scaffold(
+        appBar: AppBar(title: Center(child: Text('头部区域'))),
+
+        body: Container(child: Center(child: Text('主体区域'))),
+
+        bottomNavigationBar: Container(
+          height: 80,
+          child: Center(child: Text('底部区域')),
+        ),
+      ),
     ),
   );
 }
+
 //特性:整个应用被MaterialApp包裹，方便我们对整个应用的属性进行整体设计
 //常见属性:title/theme/home
 //title:用来展示窗口的标题内容(可以不设置)
