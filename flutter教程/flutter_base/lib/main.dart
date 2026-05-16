@@ -36,3 +36,4 @@ void main() {
 //bottomNavigationBar        底部导航栏，方便用户在不同核心功能页面间切换
 //backgroungColor            设置整个Scaffold的背景颜色
 //floatingActionButton       悬浮操作按钮，常用于触发页面的主要动作
+ 
