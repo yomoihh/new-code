@@ -11,7 +11,7 @@
       
       <div class="form-item">
         <label>密码</label>
-        <input type="password" v-model="password" placeholder="任意密码..." />
+        <input type="password" placeholder="任意密码..." />
       </div>
 
       <button @click="handleLogin" :disabled="!username">立即登录</button>
@@ -22,21 +22,17 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-// 引入状态
-import { useUserStore } from '@/stores/user'
 
 const username = ref('')
-const password = ref('')
 const router = useRouter()
-const userStore = useUserStore()
 
 const handleLogin = () => {
   if (!username.value.trim()) return alert('请输入用户名')
-  
-  // ✅ 把登录用户名存入全局状态
-  userStore.setUser(username.value)
 
-  router.replace({ name: 'Dashboard' })
+  router.replace({ 
+    name: 'Dashboard', 
+    params: { username: username.value } 
+  })
 }
 </script>
 
