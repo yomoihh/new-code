@@ -11,7 +11,7 @@
       
       <div class="form-item">
         <label>密码</label>
-        <input type="password" placeholder="任意密码..." />
+        <input type="password" v-model="password" placeholder="任意密码..." />
       </div>
 
       <button @click="handleLogin" :disabled="!username">立即登录</button>
@@ -22,24 +22,25 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+// 引入状态
+import { useUserStore } from '@/stores/user'
 
 const username = ref('')
+const password = ref('')
 const router = useRouter()
+const userStore = useUserStore()
 
 const handleLogin = () => {
   if (!username.value.trim()) return alert('请输入用户名')
   
-  // 使用 name + params 进行路由传参
-  // 跳转后的 URL 类似于： /dashboard/Alice
-  router.replace({ 
-    name: 'Dashboard', 
-    params: { username: username.value } 
-  })
+  // ✅ 把登录用户名存入全局状态
+  userStore.setUser(username.value)
+
+  router.replace({ name: 'Dashboard' })
 }
 </script>
 
 <style scoped>
-/* 样式保持不变 */
 .login-container {
   height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);

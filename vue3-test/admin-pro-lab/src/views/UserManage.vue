@@ -4,12 +4,23 @@
       <h3>👤 用户列表</h3>
       <span class="badge">共 3 人</span>
     </div>
+
+    <!-- ✅ 实时显示当前登录的用户 -->
+    <div class="login-info">
+      当前登录：<span class="login-name">{{ currentUsername }}</span>
+    </div>
+
     <table class="data-table">
       <thead>
         <tr><th>ID</th><th>姓名</th><th>所属部门</th><th>担任角色</th><th>状态</th></tr>
       </thead>
       <tbody>
-        <tr v-for="u in users" :key="u.id">
+        <tr 
+          v-for="u in users" 
+          :key="u.id"
+          <!-- 高亮当前登录用户 -->
+          :class="{ 'login-row': u.name === currentUsername }"
+        >
           <td>#{{ u.id }}</td>
           <td><strong>{{ u.name }}</strong></td>
           <td>{{ u.dept }}</td>
@@ -26,13 +37,17 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useUserStore } from '@/stores/user'
 
-// 模拟数据：与 RoleManage 和 DeptManage 的内容呼应
 const users = ref([
   { id: 1001, name: 'Alice', dept: '技术研发部', role: '超级管理员', status: 'active' },
   { id: 1002, name: 'Bob', dept: '市场营销部', role: '普通员工', status: 'active' },
   { id: 1003, name: 'Charlie', dept: '技术研发部', role: '普通员工', status: 'inactive' }
 ])
+
+// ✅ 读取全局登录状态
+const userStore = useUserStore()
+const currentUsername = userStore.currentUsername
 </script>
 
 <style scoped>
@@ -44,4 +59,9 @@ const users = ref([
 .role-tag { background: #e1f3d8; color: #67c23a; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
 .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
 .green { background: #42b983; } .gray { background: #ccc; }
+
+/* 登录用户高亮样式 */
+.login-info { margin-bottom: 15px; color: #666; }
+.login-name { color: #42b983; font-weight: bold; }
+.login-row { background-color: #f0f9ff; }
 </style>

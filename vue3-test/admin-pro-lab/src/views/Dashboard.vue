@@ -35,7 +35,8 @@ const route = useRoute() // 获取当前路由信息对象
 
 // 从路由参数 params 中获取 username
 // 使用 computed 确保如果路由参数变化，视图也会更新
-const currentUser = computed(() => route.params.username || '访客')
+const currentUser = computed(() =>{ return route.params.username || '访客' })
+
 
 const logout = () => {
   if (confirm('确定要退出系统吗？')) {
