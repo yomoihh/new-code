@@ -14,34 +14,90 @@
 //●装饰系统:通过decoration属性实现视觉效果,但和color属性互斥
 //●布同性制:促供內外地此和对介力式
 //●可选变化:支持绘制时进行矩阵变换,如旋转、倾斜、平移等
-import 'package:flutter/cupertino.dart';
-void main(){
-    runApp(());
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MainPage());
 }
+//Container组件
+// class MainPage extends StatelessWidget {
+//   const MainPage({super.key});
 
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         body: Container(
+//           transform: Matrix4.rotationZ(0.1), //弧度旋转
+//           alignment: Alignment.center, //对齐方式
+//           margin: EdgeInsets.all(20), //外边距
+//           width: 200,
+//           height: 200,
+//           decoration: BoxDecoration(
+//             //装饰
+//             color: Colors.blue,
+//             borderRadius: BorderRadius.circular(20), //圆角
+//             border: Border.all(color: Colors.yellow, width: 5), //边框
+//           ),
+//           child: Text(
+//             "hello,container",
+//             style: TextStyle(color: Colors.white, fontSize: 18),
+//           ),
+//         ),
+//         //color: Colors.blue),//简单的背景与颜色
+//       ),
+//     );
+//   }
+// }
 
+//center组件
+// class MainPage extends StatelessWidget {
+//   const MainPage({super.key});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(title: Text("center代码示例")),
+//         body: Center(
+//           child: Container(
+//             // alignment: Alignment.center,
+//             width: 150,
+//             height: 150,
+//             decoration: BoxDecoration(color: Colors.blue),
+//             child: Center(
+//               child: Text(
+//                 "居中内容",
+//                 style: TextStyle(color: Colors.white, fontSize: 18),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+//●与Center的区别:Center是Align的一个特例,继承自Align,相当于一个将alignment属性为居中的Align.center
+//●使用场景:当需要将一个组件放置在父容器的特定角落,Align是理想选择。
+//●动态尺寸:通过widthFactor和heightFactor,可以创建出与子组件大小成比例的容器,动态布局中很有用
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text("align代码示例")),
+        body: Container(
+          color: Colors.blue,
+          child: Align(
+            alignment: Alignment.center,
+            widthFactor: 1,
+            heightFactor: 1,
+            child: Icon(Icons.star, color: Colors.black, size: 50),
+          ),
+        ),
+      ),
+    );
+  }
+}
+//
