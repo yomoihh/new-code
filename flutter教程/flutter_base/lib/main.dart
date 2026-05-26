@@ -86,18 +86,53 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text("align代码示例")),
+        appBar: AppBar(title: Text("Padding代码示例")),
+        // body: Container(
+        // color: Colors.blue,
+        // child: Align(
+        //   alignment: Alignment.center,
+        //   widthFactor: 1,
+        //   heightFactor: 1,
+        //   child: Icon(Icons.star, color: Colors.black, size: 50),
+        // ),
+        // ),
         body: Container(
-          color: Colors.blue,
-          child: Align(
-            alignment: Alignment.center,
-            widthFactor: 1,
-            heightFactor: 1,
-            child: Icon(Icons.star, color: Colors.black, size: 50),
+          width: double.infinity, //正无穷大
+          height: double.infinity, //正无穷大
+          // padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(color: Colors.red),
+          child: Column(
+            // mainAxisAlignment:MainAxisAlignment.spaceAround,),//两头对齐
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,//围绕模式
+            // mainAxisAlignment: MainAxisAlignment.spaceEvenly, //平均分布
+            // mainAxisAlignment: MainAxisAlignment.start, //起始位置
+            mainAxisAlignment: MainAxisAlignment.center, //居中
+            // mainAxisAlignment: MainAxisAlignment.end, //末尾位置
+            crossAxisAlignment: CrossAxisAlignment
+                .start, //交叉轴对齐方式,end为末尾对齐,start为起始对齐,center为居中对齐
+            children: [
+              Container(width: 100, height: 100, color: Colors.blue),
+              SizedBox(height: 20), //设置组件之间的间距
+              Container(width: 100, height: 100, color: Colors.blue),
+              // SizedBox(height: 20), //设置组件之间的间距
+              Container(
+                margin: EdgeInsets.only(top: 20),
+                width: 100,
+                height: 100,
+                color: Colors.blue,
+              ),
+            ],
           ),
+          // padding: EdgeInsets.all(20),//设置上下左右的内边距
+          // padding:EdgeInsetsGeometry.only(left:10,right:10,top:20,bottom:20),//设置单边内边距
+          // padding: EdgeInsets.symmetric(
+          //   horizontal: 50,
+          //   vertical: 10,
+          // ), //设置水平和垂直内边距
+          // child: Container(color: Colors.blue),//●特点:功能单一而纯粹,就是添加内边距。如果需求仅是为组件添加间距,那么直接使用Padding组件
+          //●区别:Container也有padding属性,单一需求用Padding组件,复杂样式用Container
         ),
       ),
     );
   }
 }
-//
