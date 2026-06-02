@@ -1,136 +1,160 @@
-//flutter组件
-//●Flutter 提供了丰富强大的布局组件来构建各种用户界面。下面这个表格汇总了最核心的几类布局组件
-// 组件类别           核心组件                           主要特点/使用场景
-// 基础容器    Container, Center, Align, Padding    提供装饰、对齐、边距等基础样式和布局控制,是使用频率极高的组件
-// 线性布局      Row, Column                        在水平或垂直方向线性排列子组件,是构建界面的基础
-// 弹性布局      Flex, Expanded, Flexible           按照比例分配剩余空间,实现自适应布局,常与Row和Column配合使用
-// 层叠布局      Stack, Positioned                  让子组件重叠堆叠,用于实现如图片上叠加文字、悬浮按钮等效果
-// 流式布局      Wrap, Flow                         当主轴空间不足时自动换行或换列,常用于标签、滤镜等动态宽高内容的排列
-// 滚动布局      ListView, GridView                 提供可滚动的列表或网格视图,高效展示大量数据
-//基础容器-container
-//●定义:Container是功能丰富的布局组件,是一个多功能组合容器
-//●尺寸控制:可通过多种方式定义大小,有明确优先级规则。
-//●优先级:明确宽高>constraints约束>父组件约束>自适应组件大小
-//●装饰系统:通过decoration属性实现视觉效果,但和color属性互斥
-//●布同性制:促供內外地此和对介力式
-//●可选变化:支持绘制时进行矩阵变换,如旋转、倾斜、平移等
+//弹性布局
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MainPage());
 }
-//Container组件
-// class MainPage extends StatelessWidget {
-//   const MainPage({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: Scaffold(
-//         body: Container(
-//           transform: Matrix4.rotationZ(0.1), //弧度旋转
-//           alignment: Alignment.center, //对齐方式
-//           margin: EdgeInsets.all(20), //外边距
-//           width: 200,
-//           height: 200,
-//           decoration: BoxDecoration(
-//             //装饰
-//             color: Colors.blue,
-//             borderRadius: BorderRadius.circular(20), //圆角
-//             border: Border.all(color: Colors.yellow, width: 5), //边框
-//           ),
-//           child: Text(
-//             "hello,container",
-//             style: TextStyle(color: Colors.white, fontSize: 18),
-//           ),
-//         ),
-//         //color: Colors.blue),//简单的背景与颜色
-//       ),
-//     );
-//   }
-// }
-
-//center组件
-// class MainPage extends StatelessWidget {
-//   const MainPage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: Scaffold(
-//         appBar: AppBar(title: Text("center代码示例")),
-//         body: Center(
-//           child: Container(
-//             // alignment: Alignment.center,
-//             width: 150,
-//             height: 150,
-//             decoration: BoxDecoration(color: Colors.blue),
-//             child: Center(
-//               child: Text(
-//                 "居中内容",
-//                 style: TextStyle(color: Colors.white, fontSize: 18),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-//●与Center的区别:Center是Align的一个特例,继承自Align,相当于一个将alignment属性为居中的Align.center
-//●使用场景:当需要将一个组件放置在父容器的特定角落,Align是理想选择。
-//●动态尺寸:通过widthFactor和heightFactor,可以创建出与子组件大小成比例的容器,动态布局中很有用
+//List.generate是一个构造器,用于快速创建长度固定且每个元素可以通过索引号确定的列表
+//语法:List.generate(int count, E generator(int index),{bool growable: false})
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
+  List<Widget> getlist() {
+    return List.generate(10, (index) {
+      return Container(width: 100, height: 100, color: Colors.blue);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text("Padding代码示例")),
-        // body: Container(
-        // color: Colors.blue,
-        // child: Align(
-        //   alignment: Alignment.center,
-        //   widthFactor: 1,
-        //   heightFactor: 1,
-        //   child: Icon(Icons.star, color: Colors.black, size: 50),
+        appBar: AppBar(title: Text("wrap代码示例")),
+        //   body: Container(
+        //     width: double.infinity, //正无穷大
+        //     height: double.infinity, //正无穷大
+        //     decoration: BoxDecoration(color: Colors.red),
+        //     child: Flex(
+        //       direction: Axis.horizontal, //水平方向
+        //       children: [
+        //         Expanded(flex:1, child: Container(width: 100, height: 100, color: Colors.green)),
+        //         Expanded(flex:2,child: Container(width: 100, height: 100, color: Colors.yellow)),
+        //         Expanded(flex:3,child: Container(width: 100, height: 100, color: Colors.blue)),
+        // ],
+        //     ),
+        //   ),
         // ),
+        // body: Container(
+        //   color: Colors.amber,
+        //   width: double.infinity,
+        //   height: double.infinity,
+        //   //   child:Flex(direction: Axis.vertical,
+        //   //   children: [
+        //   //    Container(color: Colors.blue,
+        //   //    height: 100,),
+        //   //     Expanded(child:  Container(color: Colors.blueGrey),),
+        //   //     Container(color: Colors.red,height: 100,),
+        //   //   ],
+        //   //   )
+        //   // )
+        //   child: Wrap(
+        //     spacing: 10,
+        //     runSpacing: 10,
+        //     alignment: WrapAlignment.spaceAround,
+        //     direction: Axis.horizontal,
+        //     children: getlist(),
+        //   ),
         // ),
         body: Container(
-          width: double.infinity, //正无穷大
-          height: double.infinity, //正无穷大
-          // padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(color: Colors.red),
-          child: Column(
-            // mainAxisAlignment:MainAxisAlignment.spaceAround,),//两头对齐
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,//围绕模式
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly, //平均分布
-            // mainAxisAlignment: MainAxisAlignment.start, //起始位置
-            mainAxisAlignment: MainAxisAlignment.center, //居中
-            // mainAxisAlignment: MainAxisAlignment.end, //末尾位置
-            crossAxisAlignment: CrossAxisAlignment
-                .start, //交叉轴对齐方式,end为末尾对齐,start为起始对齐,center为居中对齐
-            children: [
-              Container(width: 100, height: 100, color: Colors.blue),
-              SizedBox(height: 20), //设置组件之间的间距
-              Container(width: 100, height: 100, color: Colors.blue),
-              // SizedBox(height: 20), //设置组件之间的间距
-              Container(
-                margin: EdgeInsets.only(top: 20),
-                width: 100,
-                height: 100,
-                color: Colors.blue,
-              ),
-            ],
+          width: double.infinity,
+          height: double.infinity,
+          alignment: Alignment.center,
+          color: Colors.grey,
+
+          //   child: Stack(
+          //     //层叠布局,后者覆盖前者
+          //     alignment: Alignment.center,
+          //     children: [
+          //       Container(color: Colors.red, width: 200, height: 200),
+          //       Container(color: Colors.blue, width: 100, height: 100),
+          //       Container(color: Colors.green, width: 50, height: 50),
+          //       Container(color: Colors.yellow, width: 30, height: 30),
+          //     ],
+          //   ),
+          // ),
+
+          //   child: Stack(
+          //     children: [
+          //       Container(width: 200, height: 200, color: Colors.grey),
+          //       Positioned(
+          //         top: 10,
+          //         left: 10,
+          //         child: Container(width: 100, height: 100, color: Colors.red),
+          //       ),
+          //       Positioned(
+          //         bottom: 10,
+          //         right: 10,
+          //         child: Container(width: 100, height: 100, color: Colors.blue),
+          //       ),
+          //     ],
+          //   ),
+          // child: Text(
+          //   "hello Flutter!",
+          //   style: TextStyle(
+          //     fontSize: 20,
+          //     color: Colors.white,
+          //     fontStyle: FontStyle.italic,
+          //     fontWeight: FontWeight.w900,
+          //     decoration: TextDecoration.underline,
+          //     decorationColor: Colors.black,
+          //   ),
+          // ),//基本样式
+          //////////
+          ///文本超出
+          // child: Text(
+          //   "有什么我能帮你的吗？热点：云南中专小伙 10 天 3000 元 AI 短片《丧尸清道夫》火爆全网胃真的越撑越大，越饿越小吗？最新的显卡评测哪款值得推荐？分享一些关于 Java 编程的高级技巧资讯：中央气象台发布 6 号台风“蔷薇”蓝色预亮氨酸如何助力肌肉生长？随身WiFi和流量卡哪个更方便？三角形接法在电力系统中的应用？",
+          //   style: TextStyle(color: Colors.white, fontSize: 20),
+          //   maxLines: 3,
+          //   overflow: TextOverflow.ellipsis,
+          // ),
+
+          //文本组件-TextSpan
+          // child: Text.rich(
+          //   TextSpan(
+          //     text: "hello",
+          //     children: [
+          //       TextSpan(
+          //         text: "Flutter",
+          //         style: TextStyle(
+          //           color: Colors.white,
+          //           fontSize: 20,
+          //           fontWeight: FontWeight.bold,
+          //         ),
+          //         children: [
+          //           TextSpan(
+          //             text: "!",
+          //             style: TextStyle(
+          //               color: Colors.red,
+          //               fontSize: 20,
+          //               fontWeight: FontWeight.bold,
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ],
+          //     style: TextStyle(
+          //       color: Colors.yellow,
+          //       fontSize: 20,
+          //       fontWeight: FontWeight.bold,
+          //     ),
+          //   ),
+          // ),//本地图片
+          // child: Image.asset(
+          //   "lib/images/1.jpg",
+          //   width: 200,
+          //   height: 200,
+          //   // fit: BoxFit.cover,
+          //   // fit: BoxFit.contain,
+          //   // fit: BoxFit.fill,
+          //   fit: BoxFit.fitWidth,
+          // ),
+          //网络图片
+          child: Image.network(
+            "https://pic4.zhimg.com/v2-c34c61a90095abb8713de9d1dca7ec7b_r.jpg",
+            width: 100,
+            height: 100,
+            fit: BoxFit.cover,
           ),
-          // padding: EdgeInsets.all(20),//设置上下左右的内边距
-          // padding:EdgeInsetsGeometry.only(left:10,right:10,top:20,bottom:20),//设置单边内边距
-          // padding: EdgeInsets.symmetric(
-          //   horizontal: 50,
-          //   vertical: 10,
-          // ), //设置水平和垂直内边距
-          // child: Container(color: Colors.blue),//●特点:功能单一而纯粹,就是添加内边距。如果需求仅是为组件添加间距,那么直接使用Padding组件
-          //●区别:Container也有padding属性,单一需求用Padding组件,复杂样式用Container
         ),
       ),
     );
