@@ -14,16 +14,117 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   // ---------- 以下是您原有的控制器 ----------
-  TextEditingController _usernameController =
-      TextEditingController(); //用户名输入控制器
-  TextEditingController _passwordController = TextEditingController(); //密码输入控制器
-  ScrollController _controller = ScrollController(); //滚动控制器
+  // TextEditingController _usernameController =
+  //     TextEditingController(); //用户名输入控制器（未使用，已注释）
+  // TextEditingController _passwordController = TextEditingController(); //密码输入控制器（未使用，已注释）
+  // ScrollController _controller = ScrollController(); //滚动控制器（未使用，已注释）
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text("登录")),
+        body: CustomScrollView(
+          slivers: [
+            //包裹普通widget的东西
+            SliverToBoxAdapter(
+              child: Container(
+                color: Colors.amber,
+                alignment: Alignment.center,
+                height: 200,
+                // child: Text(
+                //   "轮播图",
+                //   style: TextStyle(color: Colors.white, fontSize: 100),
+                child: PageView.builder(
+                  physics: const PageScrollPhysics(),
+                  itemCount: 10,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "轮播${index + 1}",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(child: SizedBox(height: 10)),
+            // 粘性头部：滚动时保持可见（水平分类列表）
+            SliverPersistentHeader(
+              pinned: true, // 可选：让头部始终固定在顶部
+              delegate: _StickyCategoryDelegate(), // 使用已实现的委托
+            ),
+            // 后续可以继续添加其他 sliver，例如 SliverGrid、SliverList 等
+            // 示例：添加一个 SliverGrid 展示内容
+            SliverGrid(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 1,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => Container(
+                  color: Colors.blue.shade200,
+                  alignment: Alignment.center,
+                  child: Text('商品 ${index + 1}'),
+                ),
+                childCount: 20,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// 实现粘性头部的委托类 - 包含水平滚动分类列表
+class _StickyCategoryDelegate extends SliverPersistentHeaderDelegate {
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    // 构建头部内容：一个水平滚动的分类列表
+    return Container(
+      color: Colors.white,
+      height: maxExtent, // 使用最大高度
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: const AlwaysScrollableScrollPhysics(), // 强制允许水平滑动
+        itemCount: 30,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            width: 100,
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            color: Colors.blue,
+            alignment: Alignment.center,
+            child: Text(
+              "分类${index + 1}",
+              style: const TextStyle(color: Colors.white, fontSize: 18),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  @override
+  double get maxExtent => 100; // 头部最大高度
+
+  @override
+  double get minExtent => 60; // 头部最小高度（滚动时收缩到的高度）
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    // 如果头部内容不会动态变化，返回 false 即可
+    return false;
+  }
+}
 
         // body: ListView.builder(
         //   itemCount: 100, //列表的长度
@@ -133,91 +234,3 @@ class _MainPageState extends State<MainPage> {
         // ●gridDelegate: SliverGridDelegateWithFixedCrossAxisCount:固定列数 mainAxisSpacing 主轴间距
         // SliverGridDelegateWithMaxCrossAxisExtent:最大宽度 crossAxisSpacing 交叉轴间距
         // scrollDirection设置滚动方向横向/纵向(默认)
-        body: CustomScrollView(
-          slivers: [
-            //包裹普通widget的东西
-            SliverToBoxAdapter(
-              child: Container(
-                color: Colors.amber,
-                alignment: Alignment.center,
-                child: Text(
-                  "轮播图",
-                  style: TextStyle(color: Colors.white, fontSize: 100),
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(child: SizedBox(height: 10)),
-            // 粘性头部：滚动时保持可见（水平分类列表）
-            SliverPersistentHeader(
-              pinned: true, // 可选：让头部始终固定在顶部
-              delegate: _StickyCategoryDelegate(), // 使用已实现的委托
-            ),
-            // 后续可以继续添加其他 sliver，例如 SliverGrid、SliverList 等
-            // 示例：添加一个 SliverGrid 展示内容
-            SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 1,
-              ),
-              delegate: SliverChildBuilderDelegate(
-                (context, index) => Container(
-                  color: Colors.blue.shade200,
-                  alignment: Alignment.center,
-                  child: Text('商品 ${index + 1}'),
-                ),
-                childCount: 20,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// 实现粘性头部的委托类 - 包含水平滚动分类列表
-class _StickyCategoryDelegate extends SliverPersistentHeaderDelegate {
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    // 构建头部内容：一个水平滚动的分类列表
-    return Container(
-      color: Colors.white,
-      height: maxExtent, // 使用最大高度
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        physics: const AlwaysScrollableScrollPhysics(), // 强制允许水平滑动
-        itemCount: 30,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            width: 100,
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            color: Colors.blue,
-            alignment: Alignment.center,
-            child: Text(
-              "分类${index + 1}",
-              style: const TextStyle(color: Colors.white, fontSize: 18),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  @override
-  double get maxExtent => 100; // 头部最大高度
-
-  @override
-  double get minExtent => 60; // 头部最小高度（滚动时收缩到的高度）
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    // 如果头部内容不会动态变化，返回 false 即可
-    return false;
-  }
-}
